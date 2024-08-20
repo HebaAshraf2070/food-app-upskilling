@@ -1,0 +1,49 @@
+<section>
+    <div class="container">
+        <div class="row p-3">
+            <div (click)="onNoClick()">
+                <i class="fa-regular fa-circle-xmark btn btn-outline-dark my-3 "></i>
+            </div>
+            <div class="col-md-5 ">
+                <ng-container *ngIf="data.imagePath; else noImg">
+                    <img class="w-100" [src]="'https://upskilling-egypt.com:3006/'+data.imagePath" alt="">
+                </ng-container>
+                <ng-template #noImg>
+                    <img class="w-100" src="./assets/images/avatar.png" alt="">
+                </ng-template>
+
+            </div>
+            <div class="col-md-7 ">
+                <div>
+                    <p>
+                        <span class="fw-bold">Name: </span>
+                        <span>{{data.name}}</span>
+                    </p>
+                    <p>
+                        <span class="fw-bold ">price:</span>
+                        <span>{{data.price | currency: 'EGP'}}</span>
+                    </p>
+                    <p>
+                        <span class="fw-bold">description: </span>
+                        <span>{{data.description}}</span>
+                    </p>
+                    <p>
+                        <span class="fw-bold">category:</span>
+                        <ng-container *ngFor="let item of data.category">
+                            <span>{{item.name}} </span>
+
+                        </ng-container>
+                    </p>
+                    <p>
+                        <span class="fw-bold">Role: </span>
+                        <span>{{data.tag.name}}</span>
+                    </p>
+                </div>
+
+            </div>
+            <div>
+                <button class="primary d-block ms-auto" [mat-dialog-close]="data.id">Add To Fav</button>
+            </div>
+        </div>
+    </div>
+</section>

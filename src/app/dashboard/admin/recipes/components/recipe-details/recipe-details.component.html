@@ -1,0 +1,41 @@
+<section>
+
+    <div class="row mx-auto justify-content-center">
+        <div class="col-md-6 pt-3">
+            <div>
+                <img class="w-100 shadow p-3" *ngIf="recipeDetails.imagePath ;else emptyImg"
+                    [src]="'https://upskilling-egypt.com:3006/' + recipeDetails.imagePath" alt="Recipe Image">
+                <!-- Fallback to static image if imagePath is not available -->
+                <ng-template #emptyImg>
+                    <img class="w-100" src="./assets/images/OIP.jpeg" alt="Static Image">
+                </ng-template>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div>
+                <p class="pt-4 h2 text-success">{{recipeDetails.name}}</p>
+                <p>{{recipeDetails.description}}</p>
+                <p class=" h6 text-success">{{recipeDetails.price | currency :'EGP'}}</p>
+                <p class=" h6 ">Creation Date:<span>{{recipeDetails.creationDate
+                        | date :'dd/MM/YY :HH:mm a'}}</span></p>
+                <p class=" h6 ">Modification Date:<span>{{recipeDetails.
+                        modificationDate
+                        | date :'dd/MM/YY :HH:mm a'}}</span></p>
+            </div>
+            <hr>
+            <div class="col-md-3">
+                <div *ngFor="let item of recipeDetails.category">
+                    <p class="bg-light rounded p-2 ">{{item.name}}</p>
+
+                </div>
+                <div>
+                    <p class="bg-light rounded p-2 ">{{recipeDetails.tag.name}}</p>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</section>

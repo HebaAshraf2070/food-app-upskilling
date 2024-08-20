@@ -1,0 +1,9 @@
+.section {
+    background-image: url(../../../assets/images/Rectangle.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #009240;
+    border-radius: 15px;
+
+
+}

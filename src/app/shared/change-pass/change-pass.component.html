@@ -1,0 +1,38 @@
+<section>
+    <div class="container">
+        <div class="row justify-content-center align-items-center my-5">
+            <div class="col-md-8">
+                <div class="auth-card ">
+                    <div class="w-50 mx-auto">
+                        <img src="./assets/images/logo.svg" alt="logo" class="w-75">
+                    </div>
+                    <h1 class="h4"> Change Password</h1>
+                    <form [formGroup]="changePasswordForm" (ngSubmit)="onSubmit(changePasswordForm)">
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-envelope"></i></span>
+                            <input formControlName="oldPassword" type="password" class="form-control"
+                                placeholder="Enter your password" aria-label="email" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"></i></span>
+                            <input formControlName="newPassword" type="password" class="form-control"
+                                placeholder="Enter Your New Password" aria-label="text" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"></i></span>
+                            <input formControlName="confirmNewPassword" type="password" class="form-control"
+                                placeholder="Confirm Your New Password" aria-label="password"
+                                aria-describedby="basic-addon1">
+                        </div>
+                        <div>
+                            <button class="w-100 primary" type="submit" [mat-dialog-close]="changePasswordForm">change
+                                Password</button>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

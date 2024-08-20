@@ -1,0 +1,33 @@
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4  " *ngFor="let item of favList.data">
+                <div class="position-relative rounded rounded-2 ">
+                    <img class="w-100 rounded-top-3 rounded-bottom-5" *ngIf="item.recipe.imagePath ;else emptyImg"
+                        [src]="'https://upskilling-egypt.com:3006/' + item.recipe.imagePath" alt="Recipe Image">
+                    <!-- Fallback to static image if imagePath is not available -->
+                    <ng-template #emptyImg>
+                        <img class="w-25" src="../../../../assets/images/OIP.jpeg" alt="Static Image">
+                    </ng-template>
+
+                    <div class="p-2">
+                        <h3>{{item.recipe.name}}</h3>
+                        <p>{{item.recipe.description}}</p>
+                        <a (click)="deleteFav(item.id)"
+                            class=" m-2 badge shadow-sm rounded-pill bg-light text-dark position-absolute top-0 end-0">
+                            <mat-icon class="mat-18 text-danger">delete</mat-icon>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Paginator -->
+            <div>
+                <mat-paginator #paginator class="demo-paginator" (page)="handlePageEvent($event)"
+                    [length]="favList.totalNumberOfRecords" [pageSize]="pageSize" [disabled]="disabled"
+                    [showFirstLastButtons]="showFirstLastButtons" [pageSizeOptions]="[10,25,50]" [pageIndex]="pageIndex"
+                    aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+    </div>
+</section>

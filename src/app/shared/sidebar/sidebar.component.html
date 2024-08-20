@@ -1,0 +1,32 @@
+<section class="bg-dark-color vh-100 ">
+    <div>
+        <img src="../../../assets/images/3.svg" alt="logo" class="w-100">
+    </div>
+
+    <div class="menu">
+
+        <ng-container *ngFor="let item of menuLinks">
+            <div *ngIf="item.isActive" class="menu-item" role="button" [routerLink]="item.link"
+                routerLinkActive="menu-item-active ">
+                <span>
+                    <i [class]=" item.icon"></i>
+                </span>
+                <span class="text">
+                    {{item.text}}
+                </span>
+            </div>
+        </ng-container>
+        <div class="menu-item" role="button" routerLinkActive="menu-item-active " (click)="openViewDialog()">
+            <span>
+                <i class="fa-solid fa-unlock-keyhole"></i>
+            </span>
+            <span class="text">
+                Change Password
+            </span>
+        </div>
+
+
+
+    </div>
+
+</section>

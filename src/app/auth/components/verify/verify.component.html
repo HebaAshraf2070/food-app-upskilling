@@ -1,0 +1,51 @@
+<section class="auth">
+    <div class="container">
+        <div class="row justify-content-center align-items-center min-vh-100 ">
+            <div class="col-md-8">
+                <div class="auth-card  m-3 ">
+                    <div class="w-50 mx-auto">
+                        <img src="./assets/images/logo.svg" alt="logo" class="w-75">
+                    </div>
+                    <h1>Verify Account</h1>
+                    <p> Please enter code to verify your account!</p>
+                    <form [formGroup]="verifyForm" (ngSubmit)="verify(verifyForm)">
+                        <div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><i
+                                        class="fa-solid fa-envelope"></i></span>
+                                <input formControlName="email" type="email" class="form-control"
+                                    placeholder="Enter your email" aria-label="email" aria-describedby="basic-addon1">
+                            </div>
+                            <div *ngIf="verifyForm.get('email')?.errors&&verifyForm.get('email')?.touched">
+                                <p class="text-danger ms-5" *ngIf="verifyForm.get('email')?.getError('required')">
+                                    email
+                                    is
+                                    required</p>
+                                <p class="text-danger ms-5" *ngIf="verifyForm.get('email')?.getError('email')">
+                                    email
+                                    is
+                                    invalid</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><i
+                                        class="fa-solid fa-envelope"></i></span>
+                                <input formControlName="code" type="text" class="form-control"
+                                    placeholder="Enter your code" aria-label="code" aria-describedby="basic-addon1">
+                            </div>
+                            <div *ngIf="verifyForm.get('code')?.errors&&verifyForm.get('code')?.touched">
+                                <p class="text-danger ms-5" *ngIf="verifyForm.get('code')?.getError('required')">
+                                    verfication code
+                                    is
+                                    required</p>
+                            </div>
+                        </div>
+
+                        <button class="w-100 primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,61 @@
+<section class="auth">
+    <div class="container">
+        <div class="row justify-content-center align-items-center vh-100">
+            <div class="col-md-8">
+                <div class="auth-card ">
+                    <div class="w-50 mx-auto">
+                        <img src="./assets/images/logo.svg" alt="logo" class="w-75">
+                    </div>
+                    <h1>Login</h1>
+                    <p>welcome Back! Please enter your details!</p>
+
+                    <form [formGroup]="loginForm" (ngSubmit)="login(loginForm)">
+                        <div>
+                            <div class="input-group mb-2">
+                                <span class="input-group-text" id="basic-addon1"><i
+                                        class="fa-solid fa-envelope"></i></span>
+                                <input type="text" formControlName="email" class="form-control"
+                                    placeholder="Enter your E-mail" aria-label="Username"
+                                    aria-describedby="basic-addon1">
+                            </div>
+                            <div *ngIf="loginForm.get('email')?.errors&& loginForm.get('email')?.touched">
+                                <p class="text-danger ms-5" *ngIf="loginForm.get('email')?.getError('required')">email
+                                    is required
+                                </p>
+                                <p class="text-danger ms-5" *ngIf="loginForm.get('email')?.getError('email')">email is
+                                    invalid</p>
+                            </div>
+                        </div>
+
+
+                        <div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"></i></span>
+                                <input type="password" formControlName="password" class="form-control"
+                                    placeholder="Enter your Password" aria-label="Password"
+                                    aria-describedby="basic-addon1">
+
+                            </div>
+
+                            <div *ngIf="loginForm.get('password')?.errors&& loginForm.get('password')?.touched">
+                                <p class="text-danger ms-5" *ngIf="loginForm.get('password')?.getError('required')">
+                                    password is
+                                    required</p>
+                                <p class="text-danger ms-5" *ngIf="loginForm.get('password')?.getError('pattern')">
+                                    password is
+                                    invalid</p>
+                            </div>
+                        </div>
+
+                        <div class="links">
+                            <a class="text-dark-grey" routerLink="/auth/register">Register Now?</a>
+                            <a class="text-main" routerLink="/auth/forgetPassword">Forget Password?</a>
+                        </div>
+                        <button class="w-100 primary">login</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

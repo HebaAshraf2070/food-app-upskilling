@@ -1,0 +1,95 @@
+<section>
+    <div class="page-title">
+        <div class="container">
+            <div class="row align-items-center p-3">
+                <div class="col-md-8">
+                    <div>
+                        <h1>Categories <span>item</span></h1>
+                        <p>You can now add your items that any user can order it from the Application and you can edit
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4 text-end">
+                    <div>
+                        <img src="../../../../assets/images/Group 48102127.svg" alt="" class="w-50">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- add new category button  -->
+    <div>
+        <div class="d-flex align-items-center justify-content-between my-3">
+            <h2 class="h4">Categories table details</h2>
+            <button class="primary" (click)="openAddDialog()">Add New Category</button>
+        </div>
+        <p>you can check all the details</p>
+    </div>
+
+
+    <!-- search in category -->
+    <div class="d-flex  justify-content-center m-4">
+        <mat-form-field class="example-form-field" class="w-75">
+            <input matInput type="text" [(ngModel)]="searchKey" (keydown.enter)="getCategoryData()">
+            <mat-label>Search By Name</mat-label>
+            <mat-icon matSuffix class="mat-18">search</mat-icon>
+            <mat-hint>Please Press Enter</mat-hint>
+        </mat-form-field>
+    </div>
+
+
+
+    <!--  get category data-->
+    <table class="table table-striped">
+
+        <thead>
+            <th>Name </th>
+            <th>Creation Date</th>
+            <th>Modification Date </th>
+            <th>Actions</th>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let item of listData.data">
+                <td>{{item.name}}</td>
+                <td>{{item.creationDate | date:"dd/MM/yy: hh/mm a"}}</td>
+                <td>{{item.modificationDate| date:"dd/MM/yy :hh/mm a"}}</td>
+                <td>
+                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="openViewDialog(item.id)">
+                            <mat-icon class="text-primary">visibility</mat-icon>
+                            <span>view</span>
+                        </button>
+                        <button mat-menu-item (click)="openEditDialog(item.id, item.name)">
+                            <mat-icon class="text-success">edit_square</mat-icon>
+                            <span>edit</span>
+                        </button>
+                        <button mat-menu-item (click)="openDeleteDialog(item.id)">
+                            <mat-icon class="text-danger">delete</mat-icon>
+                            <span>delete</span>
+                        </button>
+                    </mat-menu>
+
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+
+
+    <!-- paginator -->
+    <div>
+        <div>
+            <mat-paginator #paginator class="demo-paginator" (page)="handlePageEvent($event)"
+                [length]="listData.totalNumberOfRecords" [pageSize]="pageSize" [disabled]="disabled"
+                [showFirstLastButtons]="showFirstLastButtons" [pageSizeOptions]="[10,25,50]" [pageIndex]="pageIndex"
+                aria-label="Select page">
+            </mat-paginator>
+        </div>
+    </div>
+
+
+</section>

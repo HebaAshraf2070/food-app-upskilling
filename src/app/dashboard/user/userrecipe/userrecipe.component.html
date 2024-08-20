@@ -1,0 +1,132 @@
+<section>
+    <div class="page-title">
+        <div class="container">
+            <div class="row align-items-center p-3">
+                <div class="col-md-8">
+                    <div>
+                        <h1>Recipes <span>item</span></h1>
+                        <p>You can now add your items that any user can order from the application, and you can edit
+                            them.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 text-end">
+                    <div>
+                        <img src="./assets/images/Group 48102127.svg" alt="" class="w-50">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add new Recipe button -->
+    <div>
+        <div class="d-flex align-items-center justify-content-between my-3">
+            <h2 class="h4">Recipes table details</h2>
+        </div>
+        <p>You can check all the details here.</p>
+    </div>
+
+    <!-- Search in category -->
+    <div class="row">
+        <div class="col-md-6">
+            <mat-form-field class="example-form-field w-75">
+                <input matInput type="text" [(ngModel)]="searchKey" (keydown.enter)="getRecipesData()">
+                <mat-label>Search By Name</mat-label>
+                <mat-icon matSuffix class="mat-18">search</mat-icon>
+                <mat-hint>Please Press Enter</mat-hint>
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field>
+                <mat-label>Tags</mat-label>
+                <mat-select [(ngModel)]="tagId" (selectionChange)="getRecipesData()">
+                    <mat-option value="">All</mat-option>
+                    <mat-option *ngFor="let item of listTags" [value]="item.id">{{ item.name }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field>
+                <mat-label>Category</mat-label>
+                <mat-select [(ngModel)]="categoryId" (selectionChange)="getRecipesData()">
+                    <mat-option value="">All</mat-option>
+                    <mat-option *ngFor="let item of categoryList" [value]="item.id">{{ item.name }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <!-- Display recipes data -->
+    <table class="table table-striped text-center">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Tag</th>
+                <th>Image</th>
+                <th>Creation Date</th>
+                <th>Modification Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of listData.data">
+                <td>{{ item.name ? item.name : 'No Name' }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.description }}</td>
+                <!-- array of category------------------------->
+                <td>
+                    <ng-container *ngIf="item.category && item.category.length > 0; else noCategory">
+                        <ng-container *ngFor="let cat of item.category; let isLast = last">
+                            {{ cat.name }}<ng-container *ngIf="!isLast">, </ng-container>
+                        </ng-container>
+                    </ng-container>
+                    <ng-template #noCategory>
+                        No Category
+                    </ng-template>
+                </td>
+
+                <td>{{ item.tag.name }}</td>
+                <!-- img---------------------->
+                <td>
+                    <img class="w-25" *ngIf="item.imagePath ;else emptyImg"
+                        [src]="'https://upskilling-egypt.com:3006/' + item.imagePath" alt="Recipe Image">
+                    <!-- Fallback to static image if imagePath is not available -->
+                    <ng-template #emptyImg>
+                        <img class="w-25" src="../../../../assets/images/OIP.jpeg" alt="Static Image">
+                    </ng-template>
+                </td>
+                <td>{{ item.creationDate | date: 'dd/MM/yy: hh:mm a' }}</td>
+                <td>{{ item.modificationDate | date: 'dd/MM/yy : hh:mm a' }}</td>
+                <td>
+                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="openView(item)">
+                            <mat-icon class="text-primary">visibility</mat-icon>
+                            <span>view</span>
+                        </button>
+                        <button mat-menu-item (click)="onAddToFav(item.id)">
+                            <mat-icon class="text-success">favorite</mat-icon>
+                            <span>favorite</span>
+                        </button>
+
+                    </mat-menu>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Paginator -->
+    <div>
+        <mat-paginator #paginator class="demo-paginator" (page)="handlePageEvent($event)"
+            [length]="listData.totalNumberOfRecords" [pageSize]="pageSize" [disabled]="disabled"
+            [showFirstLastButtons]="showFirstLastButtons" [pageSizeOptions]="[10,25,50]" [pageIndex]="pageIndex"
+            aria-label="Select page">
+        </mat-paginator>
+    </div>
+</section>

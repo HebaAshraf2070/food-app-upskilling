@@ -1,0 +1,42 @@
+<section>
+    <div class="container">
+        <div class="row p-3">
+            <div (click)="onNoClick()">
+                <i class="fa-regular fa-circle-xmark btn btn-outline-dark my-3 "></i>
+            </div>
+            <div class="col-md-3 ">
+                <ng-container *ngIf="data.imagePath; else noImg">
+                    <img class="w-100" [src]="'https://upskilling-egypt.com:3006/'+data.imagePath" alt="">
+                </ng-container>
+                <ng-template #noImg>
+                    <img class="w-100" src="./assets/images/avatar.png" alt="">
+                </ng-template>
+
+            </div>
+            <div class="col-md-9 my-3">
+                <div>
+                    <p>
+                        <span class="fw-bold">Name: </span>
+                        <span>{{data.userName}}</span>
+                    </p>
+                    <p>
+                        <span class="fw-bold ">Email:</span>
+                        <span>{{data.email}}</span>
+                    </p>
+                    <p>
+                        <span class="fw-bold">Country: </span>
+                        <span>{{data.country}}</span>
+                    </p>
+                    <p>
+                        <span class="fw-bold">Phone Number:</span>
+                        <span>{{data.phoneNumber}}</span>
+                    </p>
+                    <p>
+                        <span class="fw-bold">Role: </span>
+                        <span>{{data.group.name== "systemUser"? 'User':'Admin'}}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

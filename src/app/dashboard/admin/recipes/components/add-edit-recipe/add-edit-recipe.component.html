@@ -1,0 +1,58 @@
+<div></div>
+<div class="card w-75 mx-auto border-0 shadow p-3 mt-5">
+    <form [formGroup]="recipesForm" (ngSubmit)="onAddRecipe(recipesForm)" class="w-100 ">
+        <div>
+            <mat-form-field appearance="fill" class="w-100">
+                <mat-label>Recipe Name</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="name">
+
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field appearance="fill" class="w-100">
+                <mat-label>Price</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="price">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="w-100">
+                <mat-label>Tags</mat-label>
+                <mat-select formControlName="tagId">
+                    <mat-option *ngFor="let item of listTags" [value]="item.id">{{item.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field appearance="fill" class="w-100">
+                <mat-label>Category</mat-label>
+                <mat-select multiple formControlName="categoriesIds">
+                    <mat-option *ngFor="let item of categoryList" [value]="item.id">{{item.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="example-full-width" class="w-100">
+                <mat-label>Description</mat-label>
+                <textarea matInput placeholder="Ex. describe your recipe" formControlName="description"></textarea>
+            </mat-form-field>
+        </div>
+        <div>
+            <ngx-dropzone (change)="onSelect($event)" class="  mx-auto my-3 ">
+                <ngx-dropzone-label>
+                    <i class="fa-solid fa-bowl-rice fs-1 mx-auto"></i>
+                    <i class="fa-solid fa-plus"></i>
+                </ngx-dropzone-label>
+                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" [removable]="true"
+                    (removed)="onRemove(f)" *ngFor="let f of files" [file]="f">
+                    <!-- <ngx-dropzone-label>{{ f.name }} </ngx-dropzone-label> -->
+                </ngx-dropzone-image-preview>
+            </ngx-dropzone>
+        </div>
+
+        <div class="text-end my-3">
+            <button class="primary">Add</button>
+            <button type="button">Cancel</button>
+        </div>
+
+    </form>
+</div>

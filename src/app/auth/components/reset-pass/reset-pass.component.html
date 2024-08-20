@@ -1,0 +1,78 @@
+<section class="auth">
+    <div class="container">
+        <div class="row justify-content-center align-items-center vh-100">
+            <div class="col-md-8">
+                <div class="auth-card ">
+                    <div>
+                        <i class="fa-solid fa-arrow-left" role="button" routerLink="/auth/forgetPassword"></i>
+                    </div>
+                    <div class="w-50 mx-auto">
+                        <img src="./assets/images/logo.svg" alt="logo" class="w-75">
+                    </div>
+                    <h1> Reset Password</h1>
+                    <p>Please Enter Your Otp or Check Your Inbox</p>
+
+                    <form [formGroup]="resetPassForm" (ngSubmit)="resetPass(resetPassForm)">
+                        <div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><i
+                                        class="fa-solid fa-envelope"></i></span>
+                                <input formControlName="email" type="email" class="form-control"
+                                    placeholder="Enter your E-mail" aria-label="email" aria-describedby="basic-addon1">
+                            </div>
+                            <div *ngIf="resetPassForm.get('email')?.errors&&resetPassForm.get('email')?.touched">
+                                <p class="text-danger ms-5" *ngIf="resetPassForm.get('email')?.getError('required')">
+                                    email is required </p>
+                                <p class="text-danger ms-5" *ngIf="resetPassForm.get('email')?.getError('email')">email
+                                    is invalid</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"></i></span>
+                                <input formControlName="seed" type="text" class="form-control" placeholder="Enter OTP"
+                                    aria-label="text" aria-describedby="basic-addon1">
+                            </div>
+                            <div *ngIf="resetPassForm.get('seed')?.errors&&resetPassForm.get('seed')?.touched">
+                                <p class="text-danger ms-5" *ngIf="resetPassForm.get('seed')?.getError('required')">
+                                    otp is required</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"></i></span>
+                                <input formControlName="password" type="password" class="form-control"
+                                    placeholder=" New Password" aria-label="password" aria-describedby="basic-addon1">
+                            </div>
+                            <div *ngIf="resetPassForm.get('password')?.errors&&resetPassForm.get('password')?.touched">
+                                <p class="text-danger ms-5" *ngIf="resetPassForm.get('password')?.getError('required')">
+                                    password is required</p>
+                                <p class="text-danger ms-5" *ngIf="resetPassForm.get('password')?.getError('pattern')">
+                                    password should have uppercase and special characters</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"></i></span>
+                                <input formControlName="confirmPassword" type="password" class="form-control"
+                                    placeholder="Confirm New Password" aria-label="Password"
+                                    aria-describedby="basic-addon1">
+                            </div>
+                            <div
+                                *ngIf="resetPassForm.get('confirmPassword')?.errors&&resetPassForm.get('confirmPassword')?.touched">
+                                <p class="text-danger ms-5"
+                                    *ngIf="resetPassForm.get('confirmPassword')?.getError('require')">
+                                    confirmPassword is required</p>
+                                <p class="text-danger ms-5"
+                                    *ngIf="resetPassForm.get('confirmPassword')?.getError('notsame')">
+                                    confirmPassword doe not match</p>
+                            </div>
+                        </div>
+
+                        <button class="w-100 primary">Reset Password</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
